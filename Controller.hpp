@@ -19,12 +19,22 @@ private:
     Bank rightBank;
     Boat boat;
 
+    const int WIDTH = 58;
+    const int MENU_WIDTH = 8;
+    const char DISPLAY_CHAR = 'p';
+    const char LOAD_CHAR = 'e';
+    const char UNLOAD_CHAR = 'd';
+    const char MOVE_CHAR = 'm';
+    const char RESET_CHAR = 'r';
+    const char QUIT_CHAR = 'q';
+    const char MENU_CHAR = 'h';
+
     int turn();
 public:
     Controller();
 
-    void showMenu();
-    void display();
+    void showMenu() const;
+    void display() const;
     void nextTurn();
 };
 
