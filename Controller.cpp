@@ -28,6 +28,7 @@ void Controller::showMenu() const {
     cout << RESET_CHAR << setw(MENU_WIDTH) << ": " << "reinitialiser" << endl;
     cout << QUIT_CHAR << setw(MENU_WIDTH) << ": " << "quitter" << endl;
     cout << MENU_CHAR << setw(MENU_WIDTH) << ": " << "menu" << endl;
+    cout << endl;
 }
 
 void Controller::display() const {
@@ -37,7 +38,14 @@ void Controller::display() const {
 }
 
 void Controller::nextTurn() {
-    moveBoat();
+    ++_turn;
+    display();
+}
+
+void Controller::beginGame() {
+    while(!_isFinish){
+        askAndRunCommand();
+    }
 }
 
 
@@ -73,4 +81,29 @@ void Controller::moveBoat() {
     }else{
         _boat.setBank(_leftBank);
     }
+}
+
+void Controller::askAndRunCommand() {
+    string command;
+    cout << _turn << "> ";
+    cin >> command;
+
+    // Single char command with no argument
+    if(command.length() == 1){
+        char c = command[0];
+        // Quit
+        if(c == QUIT_CHAR){
+            _isFinish = true;
+        }
+        // Help
+        else if(c == MENU_CHAR){
+            showMenu();
+        }
+        // Move boat
+        else if(c == MOVE_CHAR){
+            moveBoat();
+            nextTurn();
+        }
+    }
+
 }

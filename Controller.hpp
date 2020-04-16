@@ -22,6 +22,7 @@ private:
     Bank _rightBank;
     Boat _boat;
     int _turn;
+    bool _isFinish = false;
 
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
@@ -41,12 +42,14 @@ public:
     void showMenu() const;
     void display() const;
     void nextTurn();
+    void beginGame();
 
 private:
     void displayLeftBank() const;
     void displayRightBank() const;
     void displayBoat() const;
     void moveBoat();
+    void askAndRunCommand();
 
 };
 
