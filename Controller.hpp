@@ -32,6 +32,8 @@ private:
     const char RESET_CHAR = 'r';
     const char QUIT_CHAR = 'q';
     const char MENU_CHAR = 'h';
+    const char RIVER_CHAR = '=';
+    const char BANK_CHAR = '-';
 
 public:
     Controller();
@@ -44,6 +46,7 @@ private:
     void displayLeftBank() const;
     void displayRightBank() const;
     void displayBoat() const;
+    void moveBoat();
 
 };
 

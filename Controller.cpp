@@ -18,6 +18,8 @@ Controller::Controller():
         _turn(0)
 {}
 
+/* ------------------------ PUBLIC METHODS ------------------------ */
+
 void Controller::showMenu() const {
     cout << DISPLAY_CHAR << setw(MENU_WIDTH) << ": " << "afficher" << endl;
     cout << LOAD_CHAR << setw(MENU_WIDTH) << " <nom>: " << "embarquer <nom>" << endl;
@@ -26,4 +28,49 @@ void Controller::showMenu() const {
     cout << RESET_CHAR << setw(MENU_WIDTH) << ": " << "reinitialiser" << endl;
     cout << QUIT_CHAR << setw(MENU_WIDTH) << ": " << "quitter" << endl;
     cout << MENU_CHAR << setw(MENU_WIDTH) << ": " << "menu" << endl;
+}
+
+void Controller::display() const {
+    displayLeftBank();
+    displayBoat();
+    displayRightBank();
+}
+
+void Controller::nextTurn() {
+    moveBoat();
+}
+
+
+/* ------------------------ PRIVATE METHODS ------------------------ */
+
+void Controller::displayLeftBank() const {
+    cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
+    cout << _leftBank.getName() << ": " << endl;
+    cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
+}
+
+void Controller::displayRightBank() const {
+    cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
+    cout << _rightBank.getName() << ": " << endl;
+    cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
+}
+
+void Controller::displayBoat() const {
+    if(_boat.getBank() == _leftBank){
+        cout << _boat.getName() << ": " << endl;
+        cout << setfill(RIVER_CHAR) << setw(WIDTH) << "" << endl;
+        cout << endl;
+    }else{
+        cout << endl;
+        cout << setfill(RIVER_CHAR) << setw(WIDTH) << "" << endl;
+        cout << _boat.getName() << ": " << endl;
+    }
+}
+
+void Controller::moveBoat() {
+    if(_boat.getBank() == _leftBank){
+        _boat.setBank(_rightBank);
+    }else{
+        _boat.setBank(_leftBank);
+    }
 }
