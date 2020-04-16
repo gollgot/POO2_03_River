@@ -2,12 +2,12 @@
 // Created by loic on 4/9/20.
 //
 
-#ifndef POO2_03_RIVER_BANK_H
-#define POO2_03_RIVER_BANK_H
+#ifndef POO2_03_RIVER_BANK_HPP
+#define POO2_03_RIVER_BANK_HPP
 
 
 #include <string>
-#include "Container.h"
+#include "Container.hpp"
 
 class Bank : public Container{
 
@@ -19,4 +19,4 @@ private:
 };
 
 
-#endif //POO2_03_RIVER_BANK_H
+#endif //POO2_03_RIVER_BANK_HPP

@@ -2,14 +2,14 @@
 // Created by loic on 4/9/20.
 //
 
-#include "Container.h"
+#include "Container.hpp"
 
 using namespace std;
 
-Container::Container(string name): name(name) {}
+Container::Container(const string& name): _name(name) {}
 
 string Container::getName() const {
-    return name;
+    return _name;
 }
 
 /**

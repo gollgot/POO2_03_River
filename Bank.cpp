@@ -2,7 +2,7 @@
 // Created by loic on 4/9/20.
 //
 
-#include "Bank.h"
+#include "Bank.hpp"
 
 using namespace std;
 

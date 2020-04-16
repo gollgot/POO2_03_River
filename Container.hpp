@@ -2,21 +2,24 @@
 // Created by loic on 4/9/20.
 //
 
-#ifndef POO2_03_RIVER_CONTAINER_H
-#define POO2_03_RIVER_CONTAINER_H
+#ifndef POO2_03_RIVER_CONTAINER_HPP
+#define POO2_03_RIVER_CONTAINER_HPP
 
 #include <string>
 #include <vector>
+
+#include "Person.hpp"
 
 
 class Container {
 
 private:
-    std::string name;
+    std::string _name;
+    std::vector<Person*> _people;
 
 public:
 
-    Container(std::string name);
+    Container(const std::string& name);
 
     std::string getName() const;
 
@@ -28,4 +31,4 @@ public:
 };
 
 
-#endif //POO2_03_RIVER_CONTAINER_H
+#endif //POO2_03_RIVER_CONTAINER_HPP

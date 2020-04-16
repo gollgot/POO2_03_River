@@ -13,11 +13,12 @@
 
 
 class Controller {
+
 private:
-    std::vector<Person> persons;
-    Bank leftBank;
-    Bank rightBank;
-    Boat boat;
+    std::vector<Person> _people;
+    Bank _leftBank;
+    Bank _rightBank;
+    Boat _boat;
 
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
@@ -30,12 +31,14 @@ private:
     const char MENU_CHAR = 'h';
 
     int turn();
+
 public:
     Controller();
 
     void showMenu() const;
     void display() const;
     void nextTurn();
+
 };
 
 

@@ -2,18 +2,18 @@
 // Created by loic on 4/9/20.
 //
 
-#ifndef POO2_03_RIVER_BOAT_H
-#define POO2_03_RIVER_BOAT_H
+#ifndef POO2_03_RIVER_BOAT_HPP
+#define POO2_03_RIVER_BOAT_HPP
 
 
 #include <string>
-#include "Container.h"
-#include "Bank.h"
+#include "Container.hpp"
+#include "Bank.hpp"
 
 class Boat : public Container{
 
 private:
-    Bank bank;
+    Bank _bank;
 
 public:
     Boat(std::string name, const Bank& bank);
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //POO2_03_RIVER_BOAT_H
+#endif //POO2_03_RIVER_BOAT_HPP

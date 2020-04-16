@@ -11,10 +11,13 @@
 #include <string>
 
 class Person {
+
 private:
-    std::string name;
+    std::string _name;
+
 public:
     bool canDrive();
+
 };
 
 

@@ -2,17 +2,17 @@
 // Created by loic on 4/9/20.
 //
 
-#include "Boat.h"
+#include "Boat.hpp"
 
 using namespace std;
 
-Boat::Boat(std::string name, const Bank &bank): Container(name), bank(bank) {}
+Boat::Boat(std::string name, const Bank &bank): Container(name), _bank(bank) {}
 
 
 Bank Boat::getBank() const {
-    return bank;
+    return _bank;
 }
 
 void Boat::setBank(const Bank &bank) {
-    this->bank = bank;
+    _bank = bank;
 }
