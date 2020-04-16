@@ -10,6 +10,14 @@
 
 using namespace std;
 
+
+Controller::Controller():
+        _leftBank(Bank("Gauche")),
+        _rightBank(Bank("Droite")),
+        _boat(Boat("Bateau", _leftBank)),
+        _turn(0)
+{}
+
 void Controller::showMenu() const {
     cout << DISPLAY_CHAR << setw(MENU_WIDTH) << ": " << "afficher" << endl;
     cout << LOAD_CHAR << setw(MENU_WIDTH) << " <nom>: " << "embarquer <nom>" << endl;

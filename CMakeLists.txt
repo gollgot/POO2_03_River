@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wconversion -Wextra -pedantic")
 
-add_executable(POO2_03_River main.cpp Container.cpp Container.hpp Boat.cpp Boat.hpp Bank.cpp Bank.hpp)
+add_executable(POO2_03_River main.cpp Controller.hpp Controller.cpp Container.cpp Container.hpp Boat.cpp Boat.hpp Bank.cpp Bank.hpp)

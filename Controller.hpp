@@ -10,6 +10,8 @@
 
 #include <vector>
 #include "Person.hpp"
+#include "Bank.hpp"
+#include "Boat.hpp"
 
 
 class Controller {
@@ -19,6 +21,7 @@ private:
     Bank _leftBank;
     Bank _rightBank;
     Boat _boat;
+    int _turn;
 
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
@@ -30,14 +33,17 @@ private:
     const char QUIT_CHAR = 'q';
     const char MENU_CHAR = 'h';
 
-    int turn();
-
 public:
     Controller();
 
     void showMenu() const;
     void display() const;
     void nextTurn();
+
+private:
+    void displayLeftBank() const;
+    void displayRightBank() const;
+    void displayBoat() const;
 
 };
 

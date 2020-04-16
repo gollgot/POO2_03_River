@@ -1,10 +1,16 @@
 #include <iostream>
+
 #include "Container.hpp"
 #include "Boat.hpp"
+#include "Controller.hpp"
 
 using namespace std;
 
 int main() {
+
+    Controller c;
+    c.showMenu();
+
 
     Bank leftBank("Left Bank");
     Bank rightBank("Right Bank");
