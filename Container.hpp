@@ -6,7 +6,6 @@
 #define POO2_03_RIVER_CONTAINER_HPP
 
 #include <string>
-#include <vector>
 
 #include "Person.hpp"
 
@@ -15,7 +14,7 @@ class Container {
 
 private:
     std::string _name;
-    std::vector<Person*> _people;
+    std::list<Person*> _people;
 
 public:
 
@@ -23,8 +22,23 @@ public:
 
     std::string getName() const;
 
+    std::list<Person*>::iterator begin();
+    std::list<Person*>::iterator end();
+
     /**
-     * Pur virtual destructor, to have a real abstract Container class
+     * Add new Person to container
+     * @param person
+     */
+    void addPerson(Person* person);
+
+    /**
+     * Removes the specified Person from the container
+     * @param person
+     */
+    void removePerson(Person* person);
+
+    /**
+     * Pure virtual destructor, to have a real abstract Container class
      */
     virtual ~Container() = 0;
 

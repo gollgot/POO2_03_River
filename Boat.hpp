@@ -1,6 +1,8 @@
-//
-// Created by loic on 4/9/20.
-//
+/**
+ * File: Boat.hpp
+ * Authors: Robin Demarta & Loïc Dessaules
+ * Date: 09.04.2020
+ */
 
 #ifndef POO2_03_RIVER_BOAT_HPP
 #define POO2_03_RIVER_BOAT_HPP
@@ -13,14 +15,14 @@
 class Boat : public Container{
 
 private:
-    Bank _bank;
+    Bank* _bank;
 
 public:
-    Boat(std::string name, const Bank& bank);
+    Boat(const std::string& name, Bank* bank);
 
-    Bank getBank() const;
+    Bank* getBank() const;
 
-    void setBank(const Bank& bank);
+    void setBank(Bank* bank);
 
 };
 

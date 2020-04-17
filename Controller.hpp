@@ -12,12 +12,14 @@
 #include "Person.hpp"
 #include "Bank.hpp"
 #include "Boat.hpp"
+#include "PersonConstraint.hpp"
 
 
 class Controller {
 
 private:
-    std::vector<Person> _people;
+    std::list<Person*> _people;
+    std::list<PersonConstraint> _constraints;
     Bank _leftBank;
     Bank _rightBank;
     Boat _boat;
@@ -38,6 +40,7 @@ private:
 
 public:
     Controller();
+    ~Controller();
 
     void showMenu() const;
     void display() const;
@@ -50,7 +53,6 @@ private:
     void displayBoat() const;
     void moveBoat();
     void askAndRunCommand();
-
 };
 
 

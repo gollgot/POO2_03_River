@@ -1,18 +1,20 @@
-//
-// Created by loic on 4/9/20.
-//
+/**
+ * File: Boat.cpp
+ * Authors: Robin Demarta & Loïc Dessaules
+ * Date: 09.04.2020
+ */
 
 #include "Boat.hpp"
 
 using namespace std;
 
-Boat::Boat(std::string name, const Bank &bank): Container(name), _bank(bank) {}
+Boat::Boat(const std::string& name, Bank* bank) : Container(name), _bank(bank) {}
 
 
-Bank Boat::getBank() const {
+Bank* Boat::getBank() const {
     return _bank;
 }
 
-void Boat::setBank(const Bank &bank) {
+void Boat::setBank(Bank* bank) {
     _bank = bank;
 }

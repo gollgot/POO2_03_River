@@ -5,3 +5,9 @@
  */
 
 #include "Person.hpp"
+
+Person::Person(const std::string& name) : _name(name) {}
+
+bool Person::canDrive() {
+    return _canDrive;
+}
