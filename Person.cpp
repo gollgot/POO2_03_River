@@ -6,7 +6,7 @@
 
 #include "Person.hpp"
 
-Person::Person(const std::string& name) : _name(name) {}
+Person::Person(const std::string& name, bool canDrive) : _name(name), _canDrive(canDrive) {}
 
 bool Person::canDrive() {
     return _canDrive;

@@ -1,6 +1,8 @@
-//
-// Created by loic on 4/9/20.
-//
+/**
+ * File: Container.cpp
+ * Authors: Robin Demarta & Loïc Dessaules
+ * Date: 09.04.2020
+ */
 
 #include "Container.hpp"
 

@@ -17,11 +17,10 @@ bool PersonConstraint::concerns(const Person& p) {
 }
 
 bool PersonConstraint::validateContainer(list<Person*>::iterator begin, list<Person*>::iterator end) {
-
-    // If the enemy is here and mediator is not, nobody of _group should be here
     if(find(begin, end, _enemy) != end && find(begin, end, _mediator) == end) {
-        for(list<Person*>::iterator it = _group.begin(); it != _group.end(); it++) {
-            if(find(begin, end, *it) != end)
+        // If the enemy is here and mediator is not, nobody of _group should be present
+        for(auto& it : _group) { // Check given container
+            if(find(begin, end, it) != end)
                 return false;
         }
     }

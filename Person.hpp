@@ -18,7 +18,7 @@ private:
     bool _canDrive;
 
 public:
-    Person(const std::string& name);
+    Person(const std::string& name, bool canDrive);
     bool canDrive();
 };
 
