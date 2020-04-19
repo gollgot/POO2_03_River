@@ -15,60 +15,28 @@ Controller::Controller():
         _leftBank(Bank("Gauche")),
         _rightBank(Bank("Droite")),
         _boat(Boat("Bateau", &_leftBank)),
-        _turn(0) {
+        _turn(0)
+{
+    _pere = new Person("pere", true);
+    _mere = new Person("mere", true);
+    _paul = new Person("paul", false);
+    _pierre = new Person("pierre", false);
+    _julie = new Person("julie", false);
+    _jeanne = new Person("jeanne", false);
+    _policier = new Person("policier", true);
+    _voleur = new Person("voleur", false);
 
-    // Create all people
-    Person* pere = new Person("pere", true);
-    Person* mere = new Person("mere", true);
-    Person* paul = new Person("paul", false);
-    Person* pierre = new Person("pierre", false);
-    Person* julie = new Person("julie", false);
-    Person* jeaaaaaaaanne = new Person("jeanne", false);
-    Person* policier = new Person("policier", true);
-    Person* voleur = new Person("voleur", false);
+    createConstraints();
 
-    // Temp containers used to group people (simplify constraints creation)
-    std::list<Person*> boys;
-    std::list<Person*> girls;
-    std::list<Person*> family;
+    // Add all personne
+    for(auto& it : _people){
+        _leftBank.addPerson(it);
+    }
 
-    // Separate boys and girls (without parents)
-    boys.push_back(paul);
-    boys.push_back(pierre);
-    girls.push_back(julie);
-    girls.push_back(jeaaaaaaaanne);
-
-    // Create constraints for boys and girls
-    _constraints.emplace_back(boys, mere, pere); // Boys cannot be with the mother without the father
-    _constraints.emplace_back(girls, pere, mere); // Girls cannot be with the father without the mother
-
-    // Bring the family together
-    family.splice(family.begin(), boys);
-    family.splice(family.begin(), girls);
-    family.push_back(pere);
-    family.push_back(mere);
-
-    // Create constraints for family
-    _constraints.emplace_back(family, voleur, policier); // Thief cannot be with family members without police officer
-
-    // Regroup people in main container
-    _people.splice(_people.begin(), family);
-    _people.push_back(voleur);
-    _people.push_back(policier);
-
-    /* ****************************************** */
-    /* ********** CONSTRAINT TEST AREA ********** */
-
-    _leftBank.addPerson(pierre);
-    _leftBank.addPerson(voleur);
-    //_leftBank.addPerson(policier);
-
-    for(auto& it : _constraints) // Test all constraints
-        cout << "Constraint test: " << it.validateContainer(_leftBank.begin(), _leftBank.end()) << endl;
 }
 
 Controller::~Controller() {
-    for(auto & it : _people)
+    for(auto& it : _people)
         delete it;
 }
 
@@ -105,21 +73,76 @@ void Controller::beginGame() {
 
 /* ------------------------ PRIVATE METHODS ------------------------ */
 
+void Controller::createConstraints() {
+    // Temp containers used to group people (simplify constraints creation)
+    std::list<Person*> boys;
+    std::list<Person*> girls;
+    std::list<Person*> family;
+
+    // Separate boys and girls (without parents)
+    boys.push_back(_paul);
+    boys.push_back(_pierre);
+    girls.push_back(_julie);
+    girls.push_back(_jeanne);
+
+    // Create constraints for boys and girls
+    _constraints.emplace_back(boys, _mere, _pere); // Boys cannot be with the mother without the father
+    _constraints.emplace_back(girls, _pere, _mere); // Girls cannot be with the father without the mother
+
+    // Bring the family together
+    family.splice(family.begin(), boys);
+    family.splice(family.begin(), girls);
+    family.push_back(_pere);
+    family.push_back(_mere);
+
+    // Create constraints for family
+    _constraints.emplace_back(family, _voleur, _policier); // Thief cannot be with family members without police officer
+
+    // Regroup people in main container
+    _people.splice(_people.begin(), family);
+    _people.push_back(_voleur);
+    _people.push_back(_policier);
+
+    /* ****************************************** */
+    /* ********** CONSTRAINT TEST AREA ********** */
+
+    //_leftBank.addPerson(pierre);
+    //_leftBank.addPerson(voleur);
+    //_leftBank.addPerson(policier);
+
+    /*
+    for(auto& it : _constraints) // Test all constraints
+        cout << "Constraint test: " << it.validateContainer(_leftBank.begin(), _leftBank.end()) << endl;
+    */
+ }
+
 void Controller::displayLeftBank() const {
     cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
-    cout << _leftBank.getName() << ": " << endl;
+    cout << _leftBank.getName() << ":";
+    for(Person* p : _leftBank.getPeople()){
+        cout << " " << p->getName();
+    }
+    cout << endl;
     cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
 }
 
 void Controller::displayRightBank() const {
     cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
-    cout << _rightBank.getName() << ": " << endl;
+    cout << _rightBank.getName() << ":";
+    for(Person* p : _rightBank.getPeople()){
+        cout << " " << p->getName();
+    }
+    cout << endl;
     cout << setfill(BANK_CHAR) << setw(WIDTH) << "" << endl;
 }
 
 void Controller::displayBoat() const {
     if(_boat.getBank() == &_leftBank){
-        cout << _boat.getName() << ": " << endl;
+        cout << _boat.getName() << ": <";
+        for(Person* p : _boat.getPeople()){
+            cout << " " << p->getName();
+        }
+        cout << " >" << endl;
         cout << setfill(RIVER_CHAR) << setw(WIDTH) << "" << endl;
         cout << endl;
     }else{

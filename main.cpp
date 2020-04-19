@@ -15,9 +15,10 @@ using namespace std;
 int main() {
 
     Controller c;
-    /*c.showMenu();
+    
+    c.showMenu();
     c.display();
-    c.beginGame();*/
+    c.beginGame();
 
     return 0;
 }

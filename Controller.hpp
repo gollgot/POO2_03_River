@@ -26,6 +26,16 @@ private:
     int _turn;
     bool _isFinish = false;
 
+    // Create all people
+    Person* _pere;
+    Person* _mere;
+    Person* _paul;
+    Person* _pierre;
+    Person* _julie;
+    Person* _jeanne;
+    Person* _policier;
+    Person* _voleur;
+
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
     const char DISPLAY_CHAR = 'p';
@@ -48,6 +58,7 @@ public:
     void beginGame();
 
 private:
+    void createConstraints();
     void displayLeftBank() const;
     void displayRightBank() const;
     void displayBoat() const;

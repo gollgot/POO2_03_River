@@ -34,3 +34,7 @@ std::list<Person*>::iterator Container::begin() {
 std::list<Person*>::iterator Container::end() {
     return _people.end();
 }
+
+std::list<Person*> Container::getPeople() const{
+    return _people;
+}

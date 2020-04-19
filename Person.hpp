@@ -20,6 +20,7 @@ private:
 public:
     Person(const std::string& name, bool canDrive);
     bool canDrive();
+    std::string getName() const;
 };
 
 

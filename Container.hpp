@@ -53,6 +53,12 @@ public:
     void removePerson(Person* person);
 
     /**
+     * Get all people
+     * @return A list of pointer on Person contains in the container
+     */
+    std::list<Person*> getPeople() const;
+
+    /**
      * Pure virtual destructor, to have a real abstract Container class
      */
     virtual ~Container() = 0;
