@@ -148,7 +148,11 @@ void Controller::displayBoat() const {
     }else{
         cout << endl;
         cout << setfill(RIVER_CHAR) << setw(WIDTH) << "" << endl;
-        cout << _boat.getName() << ": " << endl;
+        cout << _boat.getName() << ": <";
+        for(Person* p : _boat.getPeople()){
+            cout << " " << p->getName();
+        }
+        cout << " >" << endl;
     }
 }
 
