@@ -9,15 +9,18 @@
 
 
 #include <string>
+#include <list>
 
 class Person {
 
 private:
     std::string _name;
+    bool _canDrive;
 
 public:
+    Person(const std::string& name, bool canDrive);
     bool canDrive();
-
+    std::string getName() const;
 };
 
 
