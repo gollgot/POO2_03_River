@@ -68,7 +68,7 @@ public:
      * @param name
      * @return
      */
-    Person* getPersonByName(const std::string& name) const;
+    Person* getPersonByName(const std::string& name);
 
 };
 

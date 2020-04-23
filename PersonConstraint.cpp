@@ -5,6 +5,7 @@
  */
 
 #include <algorithm>
+
 #include "PersonConstraint.hpp"
 
 using namespace std;

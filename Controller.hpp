@@ -8,7 +8,6 @@
 #define POO2_03_RIVER_RIVIERE_HHP
 
 
-#include <vector>
 #include "Person.hpp"
 #include "Bank.hpp"
 #include "Boat.hpp"

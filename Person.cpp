@@ -4,8 +4,9 @@
  * Date: 09.04.2020
  */
 
-#include "Person.hpp"
 #include <string>
+
+#include "Person.hpp"
 
 using namespace std;
 
@@ -17,4 +18,8 @@ bool Person::canDrive() {
 
 string Person::getName() const {
     return _name;
+}
+
+bool operator==(Person* p, const std::string& s) {
+    return p->_name == s;
 }

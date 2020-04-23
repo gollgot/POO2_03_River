@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
+
 #include "Controller.hpp"
 #include "PersonConstraint.hpp"
 
@@ -32,7 +34,6 @@ Controller::Controller():
     for(auto& it : _people){
         _leftBank.addPerson(it);
     }
-
 }
 
 Controller::~Controller() {
@@ -102,18 +103,6 @@ void Controller::createConstraints() {
     _people.splice(_people.begin(), family);
     _people.push_back(_voleur);
     _people.push_back(_policier);
-
-    /* ****************************************** */
-    /* ********** CONSTRAINT TEST AREA ********** */
-
-    //_leftBank.addPerson(pierre);
-    //_leftBank.addPerson(voleur);
-    //_leftBank.addPerson(policier);
-
-    /*
-    for(auto& it : _constraints) // Test all constraints
-        cout << "Constraint test: " << it.validateContainer(_leftBank.begin(), _leftBank.end()) << endl;
-    */
  }
 
 void Controller::displayLeftBank() const {
@@ -205,7 +194,7 @@ void Controller::askAndRunCommand() {
             // Load person
             if(c == LOAD_CHAR){
                 Person* personFromBank = _boat.getBank()->getPersonByName(arg);
-                if(personFromBank != nullptr){
+                if(personFromBank != nullptr){ // TODO take care of the constraints
                     _boat.getBank()->removePerson(personFromBank);
                     _boat.addPerson(personFromBank);
                     nextTurn();

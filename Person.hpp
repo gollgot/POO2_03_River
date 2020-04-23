@@ -21,6 +21,15 @@ public:
     Person(const std::string& name, bool canDrive);
     bool canDrive();
     std::string getName() const;
+
+    /**
+     * Compares a Person pointer's name with a name.
+     * Allows to use algorithm's find() on Person' name with string value
+     * @param p
+     * @param s
+     * @return
+     */
+    friend bool operator==(Person* p, const std::string& s);
 };
 
 

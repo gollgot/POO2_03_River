@@ -4,6 +4,8 @@
  * Date: 09.04.2020
  */
 
+#include <algorithm>
+
 #include "Container.hpp"
 
 using namespace std;
@@ -39,10 +41,7 @@ std::list<Person*> Container::getPeople() const{
     return _people;
 }
 
-Person* Container::getPersonByName(const std::string& name) const {
-    for(Person* p : _people)
-        if(p->getName() == name)
-            return p;
-
-    return nullptr;
+Person* Container::getPersonByName(const std::string& name) {
+    auto person = find(begin(), end(), name);
+    return person != end() ? *person : nullptr;
 }
