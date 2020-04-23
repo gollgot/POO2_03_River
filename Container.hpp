@@ -23,6 +23,11 @@ public:
     Container(const std::string& name);
 
     /**
+     * Pure virtual destructor, to have a real abstract Container class
+     */
+    virtual ~Container() = 0;
+
+    /**
      * Get display name of container
      * @return
      */
@@ -59,9 +64,11 @@ public:
     std::list<Person*> getPeople() const;
 
     /**
-     * Pure virtual destructor, to have a real abstract Container class
+     * Verify if a Person with given name is in the container or not.
+     * @param name
+     * @return
      */
-    virtual ~Container() = 0;
+    bool checkIfPersonByName(std::string name);
 
 };
 

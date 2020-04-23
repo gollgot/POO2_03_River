@@ -38,3 +38,11 @@ std::list<Person*>::iterator Container::end() {
 std::list<Person*> Container::getPeople() const{
     return _people;
 }
+
+bool Container::checkIfPersonByName(std::string name) {
+    for(Person* p : _people)
+        if(p->getName() == name)
+            return true;
+
+    return false;
+}
