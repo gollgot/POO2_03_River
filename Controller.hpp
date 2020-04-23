@@ -17,8 +17,8 @@
 class Controller {
 
 private:
-    std::list<Person*> _people;
-    std::list<PersonConstraint> _constraints;
+    std::list<Person*> _people; // TODO ? store as Person
+    std::list<Constraint*> _constraints; // TODO ? store as ptr
     Bank _leftBank;
     Bank _rightBank;
     Boat _boat;
@@ -26,6 +26,7 @@ private:
     bool _isFinish = false;
 
     // Create all people
+    // TODO ? not useful to store those ptr as attribute ; only used in constructor
     Person* _pere;
     Person* _mere;
     Person* _paul;
@@ -37,13 +38,13 @@ private:
 
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
-    const char DISPLAY_CHAR = 'p';
-    const char LOAD_CHAR = 'e';
-    const char UNLOAD_CHAR = 'd';
-    const char MOVE_CHAR = 'm';
-    const char RESET_CHAR = 'r';
-    const char QUIT_CHAR = 'q';
-    const char MENU_CHAR = 'h';
+    static constexpr char DISPLAY_CHAR = 'p';
+    static constexpr char LOAD_CHAR = 'e';
+    static constexpr char UNLOAD_CHAR = 'd';
+    static constexpr char MOVE_CHAR = 'm';
+    static constexpr char RESET_CHAR = 'r';
+    static constexpr char QUIT_CHAR = 'q';
+    static constexpr char MENU_CHAR = 'h';
     const char RIVER_CHAR = '=';
     const char BANK_CHAR = '-';
 
@@ -63,6 +64,21 @@ private:
     void displayBoat() const;
     void moveBoat();
     void askAndRunCommand();
+
+    /**
+     * Verifies all Constraints on all Containers.
+     * @return true if all Constraints are respected everywhere.
+     */
+    bool validateAllContainers();
+
+    /**
+     * Moves a Person from a container to another.
+     * @param personName
+     * @param from
+     * @param to
+     * @return true if the action performed successfully.
+     */
+    bool movePersonSafely(const std::string& personName, Container* from, Container* to);
 };
 
 

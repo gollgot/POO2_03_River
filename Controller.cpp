@@ -30,14 +30,19 @@ Controller::Controller():
 
     createConstraints();
 
-    // Add all personne
+    // Add all people
     for(auto& it : _people){
         _leftBank.addPerson(it);
     }
 }
 
 Controller::~Controller() {
+    // Delete people
     for(auto& it : _people)
+        delete it;
+
+    // Delete constraints
+    for(auto& it : _constraints)
         delete it;
 }
 
@@ -87,8 +92,10 @@ void Controller::createConstraints() {
     girls.push_back(_jeanne);
 
     // Create constraints for boys and girls
-    _constraints.emplace_back(boys, _mere, _pere); // Boys cannot be with the mother without the father
-    _constraints.emplace_back(girls, _pere, _mere); // Girls cannot be with the father without the mother
+    // Boys cannot be with the mother without the father
+    _constraints.push_back(new PersonConstraint(boys, _mere, _pere));
+    // Girls cannot be with the father without the mother
+    _constraints.push_back(new PersonConstraint(girls, _pere, _mere));
 
     // Bring the family together
     family.splice(family.begin(), boys);
@@ -97,7 +104,8 @@ void Controller::createConstraints() {
     family.push_back(_mere);
 
     // Create constraints for family
-    _constraints.emplace_back(family, _voleur, _policier); // Thief cannot be with family members without police officer
+    // Thief cannot be with family members without police officer
+    _constraints.push_back(new PersonConstraint(family, _voleur, _policier));
 
     // Regroup people in main container
     _people.splice(_people.begin(), family);
@@ -214,4 +222,34 @@ void Controller::askAndRunCommand() {
 
     }
 
+}
+
+bool Controller::validateAllContainers() {
+    for(Constraint* c : _constraints)
+        if(c->validateContainer(_leftBank.begin(), _leftBank.end())
+        || c->validateContainer(_rightBank.begin(), _rightBank.end())
+        || c->validateContainer(_boat.begin(), _boat.end()))
+            return false;
+
+    return true;
+}
+
+bool Controller::movePersonSafely(const string& personName, Container* from, Container* to) {
+    // Retrieve Person
+    Person* p = from->getPersonByName(personName);
+    if(p == nullptr) return false;
+
+    // Try move
+    from->removePerson(p);
+    to->addPerson(p);
+
+    // Verify
+    if(!validateAllContainers()) {
+        // Rollback
+        to->removePerson(p);
+        from->addPerson(p);
+        return false;
+    }
+
+    return true;
 }
