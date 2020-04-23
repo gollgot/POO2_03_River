@@ -165,13 +165,18 @@ void Controller::moveBoat() {
 }
 
 void Controller::askAndRunCommand() {
-    string command;
-    cout << _turn << "> ";
-    cin >> command;
+    const string ERROR_ARG_MESSAGE = "Argument invalide";
+    const string ERROR_CMD_INVALID = "Commande invalide";
 
-    // Single char command with no argument
-    if(command.length() == 1){
-        char c = command[0];
+    const size_t BUFFER_SIZE = 256; // Max input buffer for command + argument
+    char buffer[BUFFER_SIZE + 1];
+    cout << _turn << "> ";
+    cin.getline(buffer, BUFFER_SIZE);
+
+    string userInput = buffer;
+    // Command with no argument (command with one char)
+    if(userInput.length() == 1) {
+        char c = userInput[0];
         // Quit
         if(c == QUIT_CHAR){
             _isFinish = true;
@@ -184,7 +189,40 @@ void Controller::askAndRunCommand() {
         else if(c == MOVE_CHAR){
             moveBoat();
             nextTurn();
+        } else{
+            cout << "### " << ERROR_CMD_INVALID << endl;
         }
+    }
+    // Commands with one argument
+    else {
+        // Fetch the command and arg
+        string command = userInput.substr(0, userInput.find(' '));
+        string arg = userInput.substr(userInput.find(' ') + 1);
+
+        // Command must be 1 char
+        if(command.length() == 1){
+            char c = command[0];
+            // Load person
+            if(c == LOAD_CHAR){
+                Person* personFromBank = _boat.getBank()->getPersonByName(arg);
+                if(personFromBank != nullptr){
+                    _boat.getBank()->removePerson(personFromBank);
+                    _boat.addPerson(personFromBank);
+                    nextTurn();
+                }else{
+                    cout << "### " << ERROR_ARG_MESSAGE << endl;
+                }
+            }
+            // Unload person
+            else if(c == UNLOAD_CHAR) {
+
+            } else {
+                cout << "### " << ERROR_CMD_INVALID << endl;
+            }
+        } else {
+            cout << "### " << ERROR_CMD_INVALID << endl;
+        }
+
     }
 
 }
