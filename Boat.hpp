@@ -22,7 +22,12 @@ public:
 
     Bank* getBank() const;
 
-    void setBank(Bank* bank);
+    /**
+     * Moves the boat to another Bank if there's a driver.
+     * @param bank
+     * @return true if there was a driver and if the boat moved.
+     */
+    bool setBank(Bank* bank);
 
 };
 

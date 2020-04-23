@@ -18,7 +18,7 @@ class Controller {
 
 private:
     std::list<Person*> _people; // TODO ? store as Person
-    std::list<Constraint*> _constraints; // TODO ? store as ptr
+    std::list<Constraint*> _constraints;
     Bank _leftBank;
     Bank _rightBank;
     Boat _boat;
@@ -38,13 +38,13 @@ private:
 
     const int WIDTH = 58;
     const int MENU_WIDTH = 8;
-    static constexpr char DISPLAY_CHAR = 'p';
+    static constexpr char DISPLAY_CHAR = 'p'; // TODO implement
     static constexpr char LOAD_CHAR = 'e';
     static constexpr char UNLOAD_CHAR = 'd';
     static constexpr char MOVE_CHAR = 'm';
-    static constexpr char RESET_CHAR = 'r';
+    static constexpr char RESET_CHAR = 'r'; // TODO implement
     static constexpr char QUIT_CHAR = 'q';
-    static constexpr char MENU_CHAR = 'h';
+    static constexpr char MENU_CHAR = 'h'; // TODO nasty space at the beginning of display
     const char RIVER_CHAR = '=';
     const char BANK_CHAR = '-';
 
@@ -62,7 +62,7 @@ private:
     void displayLeftBank() const;
     void displayRightBank() const;
     void displayBoat() const;
-    void moveBoat();
+    bool moveBoat();
     void askAndRunCommand();
 
     /**
@@ -72,13 +72,20 @@ private:
     bool validateAllContainers();
 
     /**
-     * Moves a Person from a container to another.
-     * @param personName
+     * Transfer Person from his current Container to another.
+     * @param p
+     * @param to
+     */
+    void movePerson(Person* p, Container* from, Container* to);
+
+    /**
+     * Moves a Person p from a container to another.
+     * @param p
      * @param from
      * @param to
      * @return true if the action performed successfully.
      */
-    bool movePersonSafely(const std::string& personName, Container* from, Container* to);
+    bool movePersonSafely(Person* p, Container* from, Container* to);
 };
 
 

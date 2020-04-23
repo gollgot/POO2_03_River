@@ -15,6 +15,20 @@ Bank* Boat::getBank() const {
     return _bank;
 }
 
-void Boat::setBank(Bank* bank) {
+bool Boat::setBank(Bank* bank) {
+    bool hasDriver = false;
+
+    // There must be a driver
+    for(Person* p : getPeople()) {
+        if(p->canDrive()) {
+            hasDriver = true;
+            break;
+        }
+    }
+
+    if(!hasDriver)
+        return false;
+
     _bank = bank;
+    return true;
 }

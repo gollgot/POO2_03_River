@@ -30,7 +30,7 @@ Controller::Controller():
 
     createConstraints();
 
-    // Add all people
+    // Add all people to initial bank (left)
     for(auto& it : _people){
         _leftBank.addPerson(it);
     }
@@ -49,7 +49,7 @@ Controller::~Controller() {
 /* ------------------------ PUBLIC METHODS ------------------------ */
 
 void Controller::showMenu() const {
-    cout << DISPLAY_CHAR << setw(MENU_WIDTH) << ": " << "afficher" << endl;
+    cout << setfill(' ') << DISPLAY_CHAR << setw(MENU_WIDTH) << ": " << "afficher" << endl;
     cout << LOAD_CHAR << setw(MENU_WIDTH) << " <nom>: " << "embarquer <nom>" << endl;
     cout << UNLOAD_CHAR << setw(MENU_WIDTH) << " <nom>: " << "debarquer <nom>" << endl;
     cout << MOVE_CHAR << setw(MENU_WIDTH) << ": " << "deplacer bateau" << endl;
@@ -153,11 +153,11 @@ void Controller::displayBoat() const {
     }
 }
 
-void Controller::moveBoat() {
+bool Controller::moveBoat() {
     if(_boat.getBank() == &_leftBank) {
-        _boat.setBank(&_rightBank);
-    }else{
-        _boat.setBank(&_leftBank);
+        return _boat.setBank(&_rightBank);
+    } else {
+        return _boat.setBank(&_leftBank);
     }
 }
 
@@ -184,8 +184,11 @@ void Controller::askAndRunCommand() {
         }
         // Move boat
         else if(c == MOVE_CHAR){
-            moveBoat();
-            nextTurn();
+            if(moveBoat())
+                nextTurn();
+            else {
+                cout << "### " << ERROR_ARG_MESSAGE << endl;
+            }
         } else{
             cout << "### " << ERROR_CMD_INVALID << endl;
         }
@@ -197,21 +200,36 @@ void Controller::askAndRunCommand() {
         string arg = userInput.substr(userInput.find(' ') + 1);
 
         // Command must be 1 char
-        if(command.length() == 1){
+        if(command.length() == 1){ // TODO clean/refactor code bellow
             char c = command[0];
             // Load person
             if(c == LOAD_CHAR){
                 Person* personFromBank = _boat.getBank()->getPersonByName(arg);
-                if(personFromBank != nullptr){ // TODO take care of the constraints
-                    _boat.getBank()->removePerson(personFromBank);
-                    _boat.addPerson(personFromBank);
-                    nextTurn();
-                }else{
+                if(personFromBank != nullptr) {
+                    // Verify move validity
+                    if(movePersonSafely(personFromBank, _boat.getBank(), &_boat)) {
+                        nextTurn();
+                    }
+                    else {
+                        cout << "### " << ERROR_ARG_MESSAGE << endl;
+                    }
+                }else {
                     cout << "### " << ERROR_ARG_MESSAGE << endl;
                 }
             }
             // Unload person
             else if(c == UNLOAD_CHAR) {
+                Person* personFromBoat = _boat.getPersonByName(arg);
+
+                if(personFromBoat != nullptr) {
+                    // Verify move validity
+                    if(movePersonSafely(personFromBoat, &_boat, _boat.getBank())) {
+                        nextTurn();
+                    }
+                    else {
+                        cout << "### " << ERROR_ARG_MESSAGE << endl;
+                    }
+                }
 
             } else {
                 cout << "### " << ERROR_CMD_INVALID << endl;
@@ -226,28 +244,27 @@ void Controller::askAndRunCommand() {
 
 bool Controller::validateAllContainers() {
     for(Constraint* c : _constraints)
-        if(c->validateContainer(_leftBank.begin(), _leftBank.end())
-        || c->validateContainer(_rightBank.begin(), _rightBank.end())
-        || c->validateContainer(_boat.begin(), _boat.end()))
+        if(!c->validateContainer(_leftBank.begin(), _leftBank.end())
+        || !c->validateContainer(_rightBank.begin(), _rightBank.end())
+        || !c->validateContainer(_boat.begin(), _boat.end()))
             return false;
 
     return true;
 }
 
-bool Controller::movePersonSafely(const string& personName, Container* from, Container* to) {
-    // Retrieve Person
-    Person* p = from->getPersonByName(personName);
-    if(p == nullptr) return false;
-
-    // Try move
+void Controller::movePerson(Person* p, Container* from, Container* to) {
     from->removePerson(p);
     to->addPerson(p);
+}
+
+bool Controller::movePersonSafely(Person* p, Container* from, Container* to) {
+    // Try move
+    movePerson(p, from, to);
 
     // Verify
     if(!validateAllContainers()) {
-        // Rollback
-        to->removePerson(p);
-        from->addPerson(p);
+        // Rollback juli
+        movePerson(p, to, from);
         return false;
     }
 
