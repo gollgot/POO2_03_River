@@ -18,4 +18,4 @@ add_executable(POO2_03_River
         Person.cpp
         Person.hpp
         PersonConstraint.cpp
-        PersonConstraint.hpp)
+        PersonConstraint.hpp Constraint.cpp Constraint.hpp)
