@@ -68,7 +68,7 @@ public:
      * @param name
      * @return
      */
-    bool checkIfPersonByName(std::string name);
+    Person* getPersonByName(const std::string& name) const;
 
 };
 

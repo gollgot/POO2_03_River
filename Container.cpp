@@ -39,10 +39,10 @@ std::list<Person*> Container::getPeople() const{
     return _people;
 }
 
-bool Container::checkIfPersonByName(std::string name) {
+Person* Container::getPersonByName(const std::string& name) const {
     for(Person* p : _people)
         if(p->getName() == name)
-            return true;
+            return p;
 
-    return false;
+    return nullptr;
 }
