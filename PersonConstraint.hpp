@@ -21,9 +21,10 @@ class PersonConstraint : public Constraint {
     std::list<Person*> _group;
     Person* _enemy;
     Person* _mediator;
+    std::string _errorMessage;
 
 public:
-    PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator);
+    PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator, const std::string& errorMessage);
     ~PersonConstraint() override {}
 
     /**
@@ -34,12 +35,7 @@ public:
      */
     bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) override;
 
-    /**
-     * Checks if a Person is concerned by this rule or not.
-     * @param p
-     * @return
-     */
-    bool concerns(const Person& p);
+    std::string errorMessage() override;
 };
 
 

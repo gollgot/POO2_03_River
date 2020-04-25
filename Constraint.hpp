@@ -16,6 +16,11 @@ class Constraint {
 public:
 
     /**
+     * Pure virtual destructor, to have a real abstract Container class
+     */
+    virtual ~Constraint() = 0;
+
+    /**
      * Validates the implemented constraint on a list of people.
      * @param begin
      * @param end
@@ -24,9 +29,10 @@ public:
     virtual bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) = 0;
 
     /**
-     * Pure virtual destructor, to have a real abstract Container class
+     * Semantic value of what is not ok. (e.g. "This person is with his enemy.")
+     * @return
      */
-    virtual ~Constraint() = 0;
+    virtual std::string errorMessage() = 0;
 };
 
 

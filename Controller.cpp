@@ -93,22 +93,22 @@ void Controller::createConstraints() {
 
     // Create constraints for boys and girls
     // Boys cannot be with the mother without the father
-    _constraints.push_back(new PersonConstraint(boys, _mere, _pere));
+    _constraints.push_back(new PersonConstraint(boys, _mere, _pere, "garcon avec sa mere sans son pere"));
     // Girls cannot be with the father without the mother
-    _constraints.push_back(new PersonConstraint(girls, _pere, _mere));
+    _constraints.push_back(new PersonConstraint(girls, _pere, _mere, "fille avec son pere sans sa mere"));
 
     // Bring the family together
-    family.splice(family.begin(), boys);
-    family.splice(family.begin(), girls);
     family.push_back(_pere);
     family.push_back(_mere);
+    family.splice(family.end(), boys);
+    family.splice(family.end(), girls);
 
     // Create constraints for family
     // Thief cannot be with family members without police officer
-    _constraints.push_back(new PersonConstraint(family, _voleur, _policier));
+    _constraints.push_back(new PersonConstraint(family, _voleur, _policier, "voleur avec famille sans le policier"));
 
     // Regroup people in main container
-    _people.splice(_people.begin(), family);
+    _people.splice(_people.end(), family);
     _people.push_back(_voleur);
     _people.push_back(_policier);
  }
@@ -162,9 +162,6 @@ bool Controller::moveBoat() {
 }
 
 void Controller::askAndRunCommand() {
-    const string ERROR_ARG_MESSAGE = "Argument invalide";
-    const string ERROR_CMD_INVALID = "Commande invalide";
-
     const size_t BUFFER_SIZE = 256; // Max input buffer for command + argument
     char buffer[BUFFER_SIZE + 1];
     cout << _turn << "> ";
@@ -191,10 +188,10 @@ void Controller::askAndRunCommand() {
             if(moveBoat())
                 nextTurn();
             else {
-                cout << "### " << ERROR_ARG_MESSAGE << endl;
+                displayError(ERROR_ARG_MESSAGE);
             }
         } else{
-            cout << "### " << ERROR_CMD_INVALID << endl;
+            displayError(ERROR_CMD_INVALID);
         }
     }
     // Commands with one argument
@@ -214,11 +211,8 @@ void Controller::askAndRunCommand() {
                     if(movePersonSafely(personFromBank, _boat.getBank(), &_boat)) {
                         nextTurn();
                     }
-                    else {
-                        cout << "### " << ERROR_ARG_MESSAGE << endl;
-                    }
                 }else {
-                    cout << "### " << ERROR_ARG_MESSAGE << endl;
+                    displayError(ERROR_ARG_MESSAGE);
                 }
             }
             // Unload person
@@ -230,30 +224,29 @@ void Controller::askAndRunCommand() {
                     if(movePersonSafely(personFromBoat, &_boat, _boat.getBank())) {
                         nextTurn();
                     }
-                    else {
-                        cout << "### " << ERROR_ARG_MESSAGE << endl;
-                    }
                 }
-
             } else {
-                cout << "### " << ERROR_CMD_INVALID << endl;
+                displayError(ERROR_CMD_INVALID);
             }
         } else {
-            cout << "### " << ERROR_CMD_INVALID << endl;
+            displayError(ERROR_CMD_INVALID);
         }
-
     }
 
 }
 
-bool Controller::validateAllContainers() {
+void Controller::displayError(const string& message) {
+    cout << ERROR_PREFIX << message << endl;
+}
+
+Constraint* Controller::validateAllContainers() {
     for(Constraint* c : _constraints)
         if(!c->validateContainer(_leftBank.begin(), _leftBank.end())
         || !c->validateContainer(_rightBank.begin(), _rightBank.end())
         || !c->validateContainer(_boat.begin(), _boat.end()))
-            return false;
+            return c;
 
-    return true;
+    return nullptr;
 }
 
 void Controller::movePerson(Person* p, Container* from, Container* to) {
@@ -266,9 +259,11 @@ bool Controller::movePersonSafely(Person* p, Container* from, Container* to) {
     movePerson(p, from, to);
 
     // Verify
-    if(!validateAllContainers()) {
-        // Rollback juli
+    Constraint* c = validateAllContainers();
+    if(c != nullptr) {
+        // Rollback and display error
         movePerson(p, to, from);
+        displayError(c->errorMessage());
         return false;
     }
 

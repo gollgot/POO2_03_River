@@ -47,6 +47,9 @@ private:
     static constexpr char MENU_CHAR = 'h'; // TODO nasty space at the beginning of display
     const char RIVER_CHAR = '=';
     const char BANK_CHAR = '-';
+    const std::string ERROR_PREFIX = "### ";
+    const std::string ERROR_ARG_MESSAGE = "Argument invalide";
+    const std::string ERROR_CMD_INVALID = "Commande invalide";
 
 public:
     Controller();
@@ -64,22 +67,23 @@ private:
     void displayBoat() const;
     bool moveBoat();
     void askAndRunCommand();
+    void displayError(const std::string& message);
 
     /**
      * Verifies all Constraints on all Containers.
-     * @return true if all Constraints are respected everywhere.
+     * @return a pointer to the Constraint that is not respect or nullptr if they're all ok.
      */
-    bool validateAllContainers();
+    Constraint* validateAllContainers();
 
     /**
      * Transfer Person from his current Container to another.
      * @param p
      * @param to
      */
-    void movePerson(Person* p, Container* from, Container* to);
+    static void movePerson(Person* p, Container* from, Container* to);
 
     /**
-     * Moves a Person p from a container to another.
+     * Moves a Person p from a container to another and displays an error if a constraint is not respected
      * @param p
      * @param from
      * @param to
