@@ -182,6 +182,10 @@ void Controller::askAndRunCommand() {
         else if(c == MENU_CHAR){
             showMenu();
         }
+        // Display
+        else if(c == DISPLAY_CHAR) {
+            display();
+        }
         // Move boat
         else if(c == MOVE_CHAR){
             if(moveBoat())
