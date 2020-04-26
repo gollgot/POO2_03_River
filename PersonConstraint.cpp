@@ -11,7 +11,7 @@
 using namespace std;
 
 PersonConstraint::PersonConstraint(list<Person*>& group, Person* enemy, Person* mediator, const string& errorMessage)
-: _group(group), _enemy(enemy), _mediator(mediator), _errorMessage(errorMessage) {}
+: Constraint(errorMessage), _group(group), _enemy(enemy), _mediator(mediator), _errorMessage(errorMessage) {}
 
 bool PersonConstraint::validateContainer(list<Person*>::iterator begin, list<Person*>::iterator end) {
     if(find(begin, end, _enemy) != end && find(begin, end, _mediator) == end) {
@@ -23,8 +23,4 @@ bool PersonConstraint::validateContainer(list<Person*>::iterator begin, list<Per
     }
 
     return true;
-}
-
-std::string PersonConstraint::errorMessage() {
-    return _errorMessage;
 }

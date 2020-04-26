@@ -235,7 +235,7 @@ void Controller::askAndRunCommand() {
 
 }
 
-void Controller::displayError(const string& message) {
+void Controller::displayError(const string& message) const {
     cout << ERROR_PREFIX << message << endl;
 }
 
@@ -263,7 +263,7 @@ bool Controller::movePersonSafely(Person* p, Container* from, Container* to) {
     if(c != nullptr) {
         // Rollback and display error
         movePerson(p, to, from);
-        displayError(c->errorMessage());
+        displayError(c->getErrorMessage());
         return false;
     }
 

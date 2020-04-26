@@ -13,7 +13,13 @@
 #include "Person.hpp"
 
 class Constraint {
+
+private:
+    std::string _errorMessage;
+
 public:
+
+    Constraint(const std::string& errorMessage);
 
     /**
      * Pure virtual destructor, to have a real abstract Container class
@@ -29,10 +35,11 @@ public:
     virtual bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) = 0;
 
     /**
-     * Semantic value of what is not ok. (e.g. "This person is with his enemy.")
-     * @return
+     * Return the error message (e.g. "This person is with his enemy.")
+     * @return The error message
      */
-    virtual std::string errorMessage() = 0;
+     std::string getErrorMessage() const;
+
 };
 
 

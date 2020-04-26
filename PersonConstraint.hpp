@@ -35,7 +35,6 @@ public:
      */
     bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) override;
 
-    std::string errorMessage() override;
 };
 
 

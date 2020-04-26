@@ -67,7 +67,7 @@ private:
     void displayBoat() const;
     bool moveBoat();
     void askAndRunCommand();
-    void displayError(const std::string& message);
+    void displayError(const std::string& message) const;
 
     /**
      * Verifies all Constraints on all Containers.
