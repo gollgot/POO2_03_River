@@ -208,9 +208,8 @@ void Controller::askAndRunCommand() {
                 Person* personFromBank = _boat.getBank()->getPersonByName(arg);
                 if(personFromBank != nullptr) {
                     // Verify move validity
-                    if(movePersonSafely(personFromBank, _boat.getBank(), &_boat)) {
-                        nextTurn();
-                    }
+                    movePersonSafely(personFromBank, _boat.getBank(), &_boat);
+                    nextTurn();
                 }else {
                     displayError(ERROR_ARG_MESSAGE);
                 }
@@ -221,9 +220,8 @@ void Controller::askAndRunCommand() {
 
                 if(personFromBoat != nullptr) {
                     // Verify move validity
-                    if(movePersonSafely(personFromBoat, &_boat, _boat.getBank())) {
-                        nextTurn();
-                    }
+                    movePersonSafely(personFromBoat, &_boat, _boat.getBank());
+                    nextTurn();
                 }
             } else {
                 displayError(ERROR_CMD_INVALID);
@@ -249,12 +247,12 @@ Constraint* Controller::validateAllContainers() {
     return nullptr;
 }
 
-void Controller::movePerson(Person* p, Container* from, Container* to) {
+void Controller::movePerson(Person* p, Container* from, Container* to) const {
     from->removePerson(p);
     to->addPerson(p);
 }
 
-bool Controller::movePersonSafely(Person* p, Container* from, Container* to) {
+void Controller::movePersonSafely(Person* p, Container* from, Container* to) {
     // Try move
     movePerson(p, from, to);
 
@@ -264,8 +262,5 @@ bool Controller::movePersonSafely(Person* p, Container* from, Container* to) {
         // Rollback and display error
         movePerson(p, to, from);
         displayError(c->getErrorMessage());
-        return false;
     }
-
-    return true;
 }

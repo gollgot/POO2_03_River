@@ -80,16 +80,15 @@ private:
      * @param p
      * @param to
      */
-    static void movePerson(Person* p, Container* from, Container* to);
+    void movePerson(Person* p, Container* from, Container* to) const;
 
     /**
      * Moves a Person p from a container to another and displays an error if a constraint is not respected
      * @param p
      * @param from
      * @param to
-     * @return true if the action performed successfully.
      */
-    bool movePersonSafely(Person* p, Container* from, Container* to);
+    void movePersonSafely(Person* p, Container* from, Container* to);
 };
 
 
