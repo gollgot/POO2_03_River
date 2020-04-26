@@ -185,11 +185,10 @@ void Controller::askAndRunCommand() {
         }
         // Move boat
         else if(c == MOVE_CHAR){
-            if(moveBoat())
-                nextTurn();
-            else {
-                displayError(ERROR_ARG_MESSAGE);
+            if(!moveBoat()) {
+                displayError(ERROR_NOT_DRIVER);
             }
+            nextTurn();
         } else{
             displayError(ERROR_CMD_INVALID);
         }

@@ -50,6 +50,7 @@ private:
     const std::string ERROR_PREFIX = "### ";
     const std::string ERROR_ARG_MESSAGE = "Argument invalide";
     const std::string ERROR_CMD_INVALID = "Commande invalide";
+    const std::string ERROR_NOT_DRIVER = "Aucun conducteur, impossible de déplacer le bateau";
 
 public:
     Controller();
