@@ -20,15 +20,6 @@ Controller::Controller():
         _boat(Boat("Bateau", &_leftBank, 2)),
         _turn(0)
 {
-    _pere = new Person("pere", true);
-    _mere = new Person("mere", true);
-    _paul = new Person("paul", false);
-    _pierre = new Person("pierre", false);
-    _julie = new Person("julie", false);
-    _jeanne = new Person("jeanne", false);
-    _policier = new Person("policier", true);
-    _voleur = new Person("voleur", false);
-
     createConstraints();
 
     // Add all people to initial bank (left)
@@ -81,6 +72,16 @@ void Controller::beginGame() {
 /* ------------------------ PRIVATE METHODS ------------------------ */
 
 void Controller::createConstraints() {
+    // Create all people
+    Person* _pere = new Person("pere", true);
+    Person* _mere = new Person("mere", true);
+    Person* _paul = new Person("paul", false);
+    Person* _pierre = new Person("pierre", false);
+    Person* _julie = new Person("julie", false);
+    Person* _jeanne = new Person("jeanne", false);
+    Person* _policier = new Person("policier", true);
+    Person* _voleur = new Person("voleur", false);
+
     // Temp containers used to group people (simplify constraints creation)
     std::list<Person*> boys;
     std::list<Person*> girls;
