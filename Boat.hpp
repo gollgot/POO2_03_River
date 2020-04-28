@@ -51,7 +51,7 @@ public:
      * Check if there is a driver inside the boat
      * @return True if there is a driver inside the boat, false otherwise
      */
-    bool containDriver() const;
+    bool containsDriver() const;
 
 };
 

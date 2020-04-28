@@ -23,7 +23,7 @@ void Boat::setBank(Bank* bank) {
     _bank = bank;
 }
 
-bool Boat::containDriver() const {
+bool Boat::containsDriver() const {
     for(Person* p : getPeople()){
         if(p->canDrive()){
             return true;

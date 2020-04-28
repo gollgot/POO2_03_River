@@ -159,7 +159,7 @@ void Controller::displayBoat() const {
 }
 
 void Controller::moveBoat() {
-    if(_boat.containDriver()){
+    if(_boat.containsDriver()){
         if(_boat.getBank() == &_leftBank) {
             _boat.setBank(&_rightBank);
         } else {
