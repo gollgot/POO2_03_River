@@ -35,7 +35,7 @@ Controller::~Controller() {
 
     // Delete constraints
     for(auto& it : _constraints)
-        delete it; // TODO warning à la compilation car pas de destructeur...
+        delete it;
 }
 
 /* ------------------------ PUBLIC METHODS ------------------------ */
