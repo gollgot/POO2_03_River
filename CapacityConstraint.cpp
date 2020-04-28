@@ -11,6 +11,6 @@ using namespace std;
 CapacityConstraint::CapacityConstraint(size_t capacity, const string& errorMessage, Container* target)
 : Constraint(errorMessage), _capacity(capacity), _target(target) {}
 
-bool CapacityConstraint::validateContainer(Container* c) {
+bool CapacityConstraint::validateContainer(Container* c) const {
     return c != _target || c->getPeopleCount() <= _capacity;
 }

@@ -21,7 +21,6 @@ class PersonConstraint : public Constraint {
     std::list<Person*> _group;
     Person* _enemy;
     Person* _mediator;
-    std::string _errorMessage;
 
 public:
     PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator, const std::string& errorMessage);
@@ -33,7 +32,7 @@ public:
      * @param end  Iterator to the end of the container to validate
      * @return true if the constraint is respected
      */
-    bool validateContainer(Container* c) override;
+    bool validateContainer(Container* c) const override;
 
 };
 

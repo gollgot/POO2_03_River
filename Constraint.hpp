@@ -33,7 +33,7 @@ public:
      * @param end
      * @return
      */
-    virtual bool validateContainer(Container* c) = 0; // todo test const
+    virtual bool validateContainer(Container* c) const = 0;
 
     /**
      * Return the error message (e.g. "This person is with his enemy.")

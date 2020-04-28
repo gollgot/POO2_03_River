@@ -23,7 +23,7 @@ public:
      * @param c
      * @return true if the capacity is not exceeded.
      */
-    bool validateContainer(Container* c) override;
+    bool validateContainer(Container* c) const override;
 };
 
 

@@ -13,7 +13,7 @@ using namespace std;
 PersonConstraint::PersonConstraint(list<Person*>& group, Person* enemy, Person* mediator, const string& errorMessage)
 : Constraint(errorMessage), _group(group), _enemy(enemy), _mediator(mediator), _errorMessage(errorMessage) {}
 
-bool PersonConstraint::validateContainer(Container* c) {
+bool PersonConstraint::validateContainer(Container* c) const {
     list<Person*>::iterator begin = c->begin();
     list<Person*>::iterator end = c->end();
 
