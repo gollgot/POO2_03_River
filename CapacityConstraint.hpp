@@ -18,12 +18,19 @@ private:
     Container* _target; // Container on which the Constraint is applied (only Boat is our case)
 
 public:
+
+    /**
+     * Constructor
+     * @param capacity The max capacity accepted
+     * @param errorMessage The error message
+     * @param target The target container
+     */
     CapacityConstraint(size_t capacity, const std::string& errorMessage, Container* target);
 
     /**
      * Verifies if the given Container exceeds the capacity or not.
-     * @param c
-     * @return true if the capacity is not exceeded.
+     * @param c The container for which we'll apply the constraint
+     * @return true if the capacity is not exceeded, false otherwise.
      */
     bool validateContainer(Container* c) const override;
 };

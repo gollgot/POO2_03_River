@@ -11,7 +11,7 @@
 
 #include "Person.hpp"
 
-
+// Abstract class
 class Container {
 
 private:
@@ -20,28 +20,33 @@ private:
 
 public:
 
+    /**
+     * Constructor
+     * @param name The Container's name
+     */
     Container(const std::string& name);
 
     /**
      * Pure virtual destructor, to have a real abstract Container class
+     * (because we don't have any other pure virtual method)
      */
     virtual ~Container() = 0;
 
     /**
      * Get display name of container
-     * @return
+     * @return The container's name
      */
     std::string getName() const;
 
     /**
-     * Get iterator at the beginning of group list
-     * @return
+     * Get iterator at the beginning of the people list
+     * @return The iterator at the beginning of the people group
      */
     std::list<Person*>::iterator begin();
 
     /**
-     * Get iterator at the end of group list
-     * @return
+     * Get iterator at the end of the people list
+     * @return The iterator at the end of the people group
      */
     std::list<Person*>::iterator end();
 
@@ -65,14 +70,14 @@ public:
 
     /**
      * Get the number of people who are in the Container
-     * @return
+     * @return The number of people in the container
      */
     size_t getPeopleCount() const;
 
     /**
      * Verify if a Person with given name is in the container or not.
-     * @param name
-     * @return
+     * @param name The name of the Person we want to fetch
+     * @return A the Person pointer if it exists, nullptr otherwise
      */
     Person* getPersonByName(const std::string& name);
 

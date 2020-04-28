@@ -19,14 +19,30 @@ private:
     size_t _capacity;
 
 public:
+
+    /**
+     * Constructor
+     * @param name The Boat name
+     * @param bank The current Bank where the boat is
+     * @param capacity The Boat max capacity
+     */
     Boat(const std::string& name, Bank* bank, size_t capacity);
 
+    /**
+     * Bank getter
+     * @return The current linked Bank
+     */
     Bank* getBank() const;
+
+    /**
+     * Capacity getter
+     * @return The Boat capacity
+     */
     size_t getCapacity() const;
 
     /**
      * Moves the boat to another Bank if there's a driver.
-     * @param bank
+     * @param bank The new Bank
      * @return true if there was a driver and if the boat moved.
      */
     bool setBank(Bank* bank);

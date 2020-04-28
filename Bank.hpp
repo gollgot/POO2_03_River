@@ -7,16 +7,18 @@
 #ifndef POO2_03_RIVER_BANK_HPP
 #define POO2_03_RIVER_BANK_HPP
 
-
 #include <string>
 #include "Container.hpp"
 
 class Bank : public Container{
 
 public:
+    /**
+     * Constructor
+     * @param name The name of the Bank
+     */
     Bank(const std::string& name);
 
-    bool operator==(const Bank& rhs);
 };
 
 

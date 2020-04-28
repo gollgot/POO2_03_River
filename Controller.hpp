@@ -33,7 +33,7 @@ private:
     const char MOVE_CHAR = 'm';
     const char RESET_CHAR = 'r';
     const char QUIT_CHAR = 'q';
-    const char MENU_CHAR = 'h'; // TODO nasty space at the beginning of display
+    const char MENU_CHAR = 'h';
     const char RIVER_CHAR = '=';
     const char BANK_CHAR = '-';
     const std::string ERROR_PREFIX = "### ";
@@ -42,21 +42,74 @@ private:
     const std::string ERROR_NOT_DRIVER = "Aucun conducteur, impossible de deplacer le bateau";
 
 public:
+
+    /**
+     * Empty constructor
+     */
     Controller();
+
+    /**
+     * Destructor, delete all Person and Constraint create dynamically
+     */
     ~Controller();
 
+    /**
+     * Display the menu
+     */
     void showMenu() const;
+
+    /**
+     * Display the current game state
+     */
     void display() const;
+
+    /**
+     * Pass to the next turn and display the game state
+     */
     void nextTurn();
+
+    /**
+     * Begin the game loop
+     */
     void beginGame();
 
 private:
+
+    /**
+     * Create all Constraint that will be used in the game
+     */
     void createConstraints();
+
+    /**
+     * Display the left Bank
+     */
     void displayLeftBank() const;
+
+    /**
+     * Display the right Bank
+     */
     void displayRightBank() const;
+
+    /**
+     * Display the Boat
+     */
     void displayBoat() const;
+
+    /**
+     * Move the Boat
+     * @return true if there was a driver and if the boat moved.
+     */
     bool moveBoat();
+
+    /**
+     * Ask to the player to type a command and execute it
+     */
     void askAndRunCommand();
+
+    /**
+     * Display an error message
+     * @param message The error message to display
+     */
     void displayError(const std::string& message) const;
 
     /**
@@ -66,23 +119,24 @@ private:
     Constraint* validateAllContainers();
 
     /**
-     * Transfer Person from his current Container to another.
-     * @param p
-     * @param to
+     * Transfer Person from his current Container to another. No specific check applied
+     * @param p The Person we want to move
+     * @param from The starting Container
+     * @param to The destination Container
      */
     void movePerson(Person* p, Container* from, Container* to) const;
 
     /**
      * Moves a Person p from a container to another and displays an error if a constraint is not respected
-     * @param p
-     * @param from
-     * @param to
+     * @param p The Person we want to move
+     * @param from The starting Container
+     * @param to The destination Container
      */
     void movePersonSafely(Person* p, Container* from, Container* to);
 
     /**
      * Put all people of the Container in the initial Container (_leftBank).
-     * @param c
+     * @param c The Container we want to reset
      */
     void reset(Container* c);
 

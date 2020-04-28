@@ -25,12 +25,19 @@ private:
     Person* _mediator;
 
 public:
+
+    /**
+     * Constructor
+     * @param group The List of Person
+     * @param enemy The enemy Person
+     * @param mediator The mediator Person
+     * @param errorMessage the error message
+     */
     PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator, const std::string& errorMessage);
 
     /**
      * Validates if the constraint is respected depending on the given container.
-     * @param begin Iterator to the beginning of the container to validate
-     * @param end  Iterator to the end of the container to validate
+     * @param c The Container for which we'll validate the Constraint
      * @return true if the constraint is respected
      */
     bool validateContainer(Container* c) const override;

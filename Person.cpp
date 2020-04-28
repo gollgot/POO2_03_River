@@ -12,7 +12,7 @@ using namespace std;
 
 Person::Person(const std::string& name, bool canDrive) : _name(name), _canDrive(canDrive) {}
 
-bool Person::canDrive() {
+bool Person::canDrive() const {
     return _canDrive;
 }
 

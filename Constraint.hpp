@@ -13,6 +13,7 @@
 #include "Container.hpp"
 #include "Person.hpp"
 
+// Abstract class
 class Constraint {
 
 private:
@@ -20,13 +21,21 @@ private:
 
 public:
 
+    /**
+     * Constructor
+     * @param errorMessage The error message
+     */
     Constraint(const std::string& errorMessage);
 
     /**
-     * Validates the implemented constraint on a list of people.
-     * @param begin
-     * @param end
-     * @return
+     * Default destructor
+     */
+    virtual ~Constraint() = default;
+
+    /**
+     * Validates the implemented constraint on a specific Container
+     * @param c The Container for which we'll apply the constraint
+     * @return True if the container pass the constraint, false otherwise
      */
     virtual bool validateContainer(Container* c) const = 0;
 
