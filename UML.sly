@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
+<classDiagram>
+  <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="POO2 - 03_River">
+    <inheritance id="14214">
+      <child>13546</child>
+      <parent>13547</parent>
+    </inheritance>
+    <inheritance id="14213">
+      <child>13548</child>
+      <parent>13547</parent>
+    </inheritance>
+    <entity entityType="CLASS" id="13552" isAbstract="false" name="PersonConstraint" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="13551" isAbstract="false" name="Person" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="_name" type="string" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="_canDrive" type="bool" visibility="PRIVATE"/>
+      <method is-constructor="true" isAbstract="false" isStatic="false" name="Person" returnType="" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="canDrive" returnType="bool" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="operator==" returnType="bool" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="p" type="Person*"/>
+        <variable const="false" name="s" type="string"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="13550" isAbstract="false" name="Controller" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="13549" isAbstract="false" name="Constraint" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="13548" isAbstract="false" name="Boat" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="_bank" type="Bank*" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="_capacity" type="size_t" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="getBank" returnType="Bank*" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getCapacity" returnType="size_t" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="setBank" returnType="bool" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="bank" type="Bank*"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="13547" isAbstract="true" name="Container" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="_name" type="string" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="_people" type="list&lt;Person*&gt;" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="getName" returnType="string" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getPeople" returnType="list&lt;Person*&gt;" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="begin" returnType="list&lt;Person*&gt;::iterator" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="end" returnType="list&lt;Person*&gt;::iterator" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="addPerson" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="person" type="Person*"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="removePerson" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="person" type="Person*"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="getPersonByName" returnType="Person*" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="name" type="string"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="13546" isAbstract="false" name="Bank" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="operator==" returnType="bool" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="rhs" type="Bank"/>
+      </method>
+    </entity>
+  </diagramElements>
+  <umlView grid="10" name="Main view" open="true">
+    <relationView color="-12566464" relationId="14213">
+      <line>
+        <point>
+          <x>261</x>
+          <y>331</y>
+        </point>
+        <point>
+          <x>261</x>
+          <y>281</y>
+        </point>
+        <point>
+          <x>411</x>
+          <y>281</y>
+        </point>
+        <point>
+          <x>411</x>
+          <y>201</y>
+        </point>
+      </line>
+    </relationView>
+    <relationView color="-12566464" relationId="14214">
+      <line>
+        <point>
+          <x>531</x>
+          <y>331</y>
+        </point>
+        <point>
+          <x>531</x>
+          <y>281</y>
+        </point>
+        <point>
+          <x>411</x>
+          <y>281</y>
+        </point>
+        <point>
+          <x>411</x>
+          <y>201</y>
+        </point>
+      </line>
+    </relationView>
+    <componentView color="-2079" componentID="13546" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>430</x>
+        <y>330</y>
+        <w>190</w>
+        <h>70</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13547" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>290</x>
+        <y>10</y>
+        <w>240</w>
+        <h>190</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13548" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>160</x>
+        <y>330</y>
+        <w>190</w>
+        <h>130</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13549" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>720</x>
+        <y>70</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13550" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>730</x>
+        <y>370</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13551" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>1230</x>
+        <y>290</y>
+        <w>260</w>
+        <h>130</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="13552" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>720</x>
+        <y>160</y>
+        <w>150</w>
+        <h>55</h>
+      </geometry>
+    </componentView>
+  </umlView>
+</classDiagram>
