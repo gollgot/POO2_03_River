@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Bank::Bank(string name) : Container(name){}
+Bank::Bank(const string& name) : Container(name){}
 
 bool Bank::operator==(const Bank &rhs) {
     return this->getName() == rhs.getName();

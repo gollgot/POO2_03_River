@@ -115,7 +115,7 @@ void Controller::createConstraints() {
     _people.push_back(_policier);
 
     // Boat capacity
-    _constraints.push_back(new CapacityConstraint(2, "plus de place sur le bateau", &_boat));
+    _constraints.push_back(new CapacityConstraint(_boat.getCapacity(), "plus de place sur le bateau", &_boat));
  }
 
 void Controller::displayLeftBank() const {

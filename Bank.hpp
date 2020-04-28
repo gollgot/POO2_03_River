@@ -12,12 +12,9 @@
 class Bank : public Container{
 
 public:
-    Bank(std::string name);
+    Bank(const std::string& name);
 
     bool operator==(const Bank& rhs);
-
-private:
-
 };
 
 

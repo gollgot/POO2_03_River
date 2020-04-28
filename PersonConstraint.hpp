@@ -26,7 +26,6 @@ private:
 
 public:
     PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator, const std::string& errorMessage);
-    ~PersonConstraint() = default;
 
     /**
      * Validates if the constraint is respected depending on the given container.

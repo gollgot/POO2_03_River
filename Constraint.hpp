@@ -23,11 +23,6 @@ public:
     Constraint(const std::string& errorMessage);
 
     /**
-     * Pure virtual destructor, to have a real abstract Container class
-     */
-    virtual ~Constraint() = default;
-
-    /**
      * Validates the implemented constraint on a list of people.
      * @param begin
      * @param end
