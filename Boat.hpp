@@ -16,11 +16,13 @@ class Boat : public Container{
 
 private:
     Bank* _bank;
+    size_t _capacity;
 
 public:
-    Boat(const std::string& name, Bank* bank);
+    Boat(const std::string& name, Bank* bank, size_t capacity);
 
     Bank* getBank() const;
+    size_t getCapacity() const;
 
     /**
      * Moves the boat to another Bank if there's a driver.

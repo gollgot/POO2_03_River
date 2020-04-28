@@ -8,11 +8,15 @@
 
 using namespace std;
 
-Boat::Boat(const std::string& name, Bank* bank) : Container(name), _bank(bank) {}
+Boat::Boat(const std::string& name, Bank* bank, size_t capacity) : Container(name), _bank(bank), _capacity(capacity) {}
 
 
 Bank* Boat::getBank() const {
     return _bank;
+}
+
+size_t Boat::getCapacity() const {
+    return _capacity;
 }
 
 bool Boat::setBank(Bank* bank) {

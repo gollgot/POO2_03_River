@@ -51,6 +51,7 @@ private:
     const std::string ERROR_ARG_MESSAGE = "Argument invalide";
     const std::string ERROR_CMD_INVALID = "Commande invalide";
     const std::string ERROR_NOT_DRIVER = "Aucun conducteur, impossible de déplacer le bateau";
+    const std::string ERROR_BOAT_FULL = "Le bateau est pleins";
 
 public:
     Controller();

@@ -16,7 +16,7 @@ using namespace std;
 Controller::Controller():
         _leftBank(Bank("Gauche")),
         _rightBank(Bank("Droite")),
-        _boat(Boat("Bateau", &_leftBank)),
+        _boat(Boat("Bateau", &_leftBank, 2)),
         _turn(0)
 {
     _pere = new Person("pere", true);
@@ -204,14 +204,21 @@ void Controller::askAndRunCommand() {
             char c = command[0];
             // Load person
             if(c == LOAD_CHAR){
-                Person* personFromBank = _boat.getBank()->getPersonByName(arg);
-                if(personFromBank != nullptr) {
-                    // Verify move validity
-                    movePersonSafely(personFromBank, _boat.getBank(), &_boat);
-                    nextTurn();
-                }else {
-                    displayError(ERROR_ARG_MESSAGE);
+
+                if(_boat.getPeople().size() < _boat.getCapacity()){
+                    Person* personFromBank = _boat.getBank()->getPersonByName(arg);
+                    if(personFromBank != nullptr) {
+                        // Verify move validity
+                        movePersonSafely(personFromBank, _boat.getBank(), &_boat);
+                    }else {
+                        displayError(ERROR_ARG_MESSAGE);
+                    }
+                }else{
+                    displayError(ERROR_BOAT_FULL);
                 }
+
+                nextTurn();
+
             }
             // Unload person
             else if(c == UNLOAD_CHAR) {
@@ -220,8 +227,10 @@ void Controller::askAndRunCommand() {
                 if(personFromBoat != nullptr) {
                     // Verify move validity
                     movePersonSafely(personFromBoat, &_boat, _boat.getBank());
-                    nextTurn();
+                }else{
+                    displayError(ERROR_ARG_MESSAGE);
                 }
+                nextTurn();
             } else {
                 displayError(ERROR_CMD_INVALID);
             }
