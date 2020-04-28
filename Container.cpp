@@ -41,6 +41,10 @@ std::list<Person*> Container::getPeople() const{
     return _people;
 }
 
+size_t Container::getPeopleCount() const {
+    return _people.size();
+}
+
 Person* Container::getPersonByName(const std::string& name) {
     auto person = find(begin(), end(), name);
     return person != end() ? *person : nullptr;

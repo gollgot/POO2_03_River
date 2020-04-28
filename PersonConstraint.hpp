@@ -33,7 +33,7 @@ public:
      * @param end  Iterator to the end of the container to validate
      * @return true if the constraint is respected
      */
-    bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) override;
+    bool validateContainer(Container* c) override;
 
 };
 

@@ -10,6 +10,7 @@
 
 #include <list>
 
+#include "Container.hpp"
 #include "Person.hpp"
 
 class Constraint {
@@ -32,7 +33,7 @@ public:
      * @param end
      * @return
      */
-    virtual bool validateContainer(std::list<Person*>::iterator begin, std::list<Person*>::iterator end) = 0;
+    virtual bool validateContainer(Container* c) = 0; // todo test const
 
     /**
      * Return the error message (e.g. "This person is with his enemy.")

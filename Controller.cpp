@@ -10,6 +10,7 @@
 
 #include "Controller.hpp"
 #include "PersonConstraint.hpp"
+#include "CapacityConstraint.hpp"
 
 using namespace std;
 
@@ -111,6 +112,9 @@ void Controller::createConstraints() {
     _people.splice(_people.end(), family);
     _people.push_back(_voleur);
     _people.push_back(_policier);
+
+    // Boat capacity
+    _constraints.push_back(new CapacityConstraint(2, "plus de place sur le bateau", &_boat));
  }
 
 void Controller::displayLeftBank() const {
@@ -204,28 +208,24 @@ void Controller::askAndRunCommand() {
         // Command must be 1 char
         if(command.length() == 1){
             char c = command[0];
+
             // Load person
             if(c == LOAD_CHAR){
-                if(_boat.getPeople().size() < _boat.getCapacity()){
-                    Person* personFromBank = _boat.getBank()->getPersonByName(arg);
-                    // Verify move validity
-                    movePersonSafely(personFromBank, _boat.getBank(), &_boat);
-                }else{
-                    displayError(ERROR_BOAT_FULL);
-                }
-                nextTurn();
+                // Verify move validity
+                movePersonSafely(_boat.getBank()->getPersonByName(arg), _boat.getBank(), &_boat);
             }
             // Unload person
             else if(c == UNLOAD_CHAR) {
-                Person* personFromBoat = _boat.getPersonByName(arg);
                 // Verify move validity
-                movePersonSafely(personFromBoat, &_boat, _boat.getBank());
-                nextTurn();
+                movePersonSafely(_boat.getPersonByName(arg), &_boat, _boat.getBank());
             }
             // Invalid command
             else {
                 displayError(ERROR_CMD_INVALID);
+                return;
             }
+
+            nextTurn();
         }
         // Invalid command
         else {
@@ -241,9 +241,9 @@ void Controller::displayError(const string& message) const {
 
 Constraint* Controller::validateAllContainers() {
     for(Constraint* c : _constraints)
-        if(!c->validateContainer(_leftBank.begin(), _leftBank.end())
-        || !c->validateContainer(_rightBank.begin(), _rightBank.end())
-        || !c->validateContainer(_boat.begin(), _boat.end()))
+        if(!c->validateContainer(&_leftBank)
+        || !c->validateContainer(&_rightBank)
+        || !c->validateContainer(&_boat))
             return c;
 
     return nullptr;

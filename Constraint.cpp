@@ -6,8 +6,7 @@
 
 #include "Constraint.hpp"
 
-
-Constraint::Constraint(const std::string &errorMessage) : _errorMessage(errorMessage) {}
+Constraint::Constraint(const std::string& errorMessage) : _errorMessage(errorMessage) {}
 
 /**
  * Need an empty implementation to works with pur virtual destructor
@@ -17,4 +16,3 @@ Constraint::Constraint(const std::string &errorMessage) : _errorMessage(errorMes
 std::string Constraint::getErrorMessage() const {
     return _errorMessage;
 }
-

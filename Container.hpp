@@ -64,6 +64,12 @@ public:
     std::list<Person*> getPeople() const;
 
     /**
+     * Get the number of people who are in the Container
+     * @return
+     */
+    size_t getPeopleCount() const;
+
+    /**
      * Verify if a Person with given name is in the container or not.
      * @param name
      * @return
