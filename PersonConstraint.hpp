@@ -18,13 +18,15 @@
  * People in _group cannot be with _enemy unless _mediator is present too.
  */
 class PersonConstraint : public Constraint {
+
+private:
     std::list<Person*> _group;
     Person* _enemy;
     Person* _mediator;
 
 public:
     PersonConstraint(std::list<Person*>& group, Person* enemy, Person* mediator, const std::string& errorMessage);
-    ~PersonConstraint() override {}
+    ~PersonConstraint() = default;
 
     /**
      * Validates if the constraint is respected depending on the given container.

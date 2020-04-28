@@ -25,7 +25,7 @@ public:
     /**
      * Pure virtual destructor, to have a real abstract Container class
      */
-    virtual ~Constraint() = 0;
+    virtual ~Constraint() = default;
 
     /**
      * Validates the implemented constraint on a list of people.

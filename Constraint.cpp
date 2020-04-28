@@ -8,11 +8,6 @@
 
 Constraint::Constraint(const std::string& errorMessage) : _errorMessage(errorMessage) {}
 
-/**
- * Need an empty implementation to works with pur virtual destructor
- */
- Constraint::~Constraint(){}
-
 std::string Constraint::getErrorMessage() const {
     return _errorMessage;
 }

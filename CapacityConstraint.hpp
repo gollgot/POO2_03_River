@@ -12,6 +12,8 @@
 #include "Constraint.hpp"
 
 class CapacityConstraint : public Constraint {
+
+private:
     size_t _capacity;
     Container* _target; // Container on which the Constraint is applied (only Boat is our case)
 
