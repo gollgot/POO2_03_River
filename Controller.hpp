@@ -96,10 +96,9 @@ private:
     void displayBoat() const;
 
     /**
-     * Move the Boat
-     * @return true if there was a driver and if the boat moved.
+     * Move the Boat if there is a driver inside it
      */
-    bool moveBoat();
+    void moveBoat();
 
     /**
      * Ask to the player to type a command and execute it

@@ -19,20 +19,15 @@ size_t Boat::getCapacity() const {
     return _capacity;
 }
 
-bool Boat::setBank(Bank* bank) {
-    bool hasDriver = false;
+void Boat::setBank(Bank* bank) {
+    _bank = bank;
+}
 
-    // There must be a driver
-    for(Person* p : getPeople()) {
-        if(p->canDrive()) {
-            hasDriver = true;
-            break;
+bool Boat::containDriver() const {
+    for(Person* p : getPeople()){
+        if(p->canDrive()){
+            return true;
         }
     }
-
-    if(!hasDriver)
-        return false;
-
-    _bank = bank;
-    return true;
+    return false;
 }

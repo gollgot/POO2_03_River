@@ -158,11 +158,15 @@ void Controller::displayBoat() const {
     }
 }
 
-bool Controller::moveBoat() {
-    if(_boat.getBank() == &_leftBank) {
-        return _boat.setBank(&_rightBank);
-    } else {
-        return _boat.setBank(&_leftBank);
+void Controller::moveBoat() {
+    if(_boat.containDriver()){
+        if(_boat.getBank() == &_leftBank) {
+            _boat.setBank(&_rightBank);
+        } else {
+            _boat.setBank(&_leftBank);
+        }
+    }else{
+        displayError(ERROR_NOT_DRIVER);
     }
 }
 
@@ -195,9 +199,7 @@ void Controller::askAndRunCommand() {
         }
         // Move boat
         else if(c == MOVE_CHAR){
-            if(!moveBoat()) {
-                displayError(ERROR_NOT_DRIVER);
-            }
+            moveBoat();
             nextTurn();
         }
         // Invalid command
@@ -286,5 +288,5 @@ void Controller::reset(Container* c) {
 void Controller::resetGame() {
     reset(&_rightBank);
     reset(&_boat);
-    // TODO reset boat to _leftBank
+    _boat.setBank(&_leftBank);
 }

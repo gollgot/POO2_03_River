@@ -45,7 +45,13 @@ public:
      * @param bank The new Bank
      * @return true if there was a driver and if the boat moved.
      */
-    bool setBank(Bank* bank);
+    void setBank(Bank* bank);
+
+    /**
+     * Check if there is a driver inside the boat
+     * @return True if there is a driver inside the boat, false otherwise
+     */
+    bool containDriver() const;
 
 };
 
