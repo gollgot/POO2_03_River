@@ -35,7 +35,7 @@ Controller::~Controller() {
 
     // Delete constraints
     for(auto& it : _constraints)
-        delete it;
+        delete it; // TODO warning à la compilation car pas de destructeur...
 }
 
 /* ------------------------ PUBLIC METHODS ------------------------ */
@@ -188,6 +188,11 @@ void Controller::askAndRunCommand() {
         else if(c == DISPLAY_CHAR) {
             display();
         }
+        // Display
+        else if(c == RESET_CHAR) {
+            resetGame();
+            display();
+        }
         // Move boat
         else if(c == MOVE_CHAR){
             if(!moveBoat()) {
@@ -270,4 +275,16 @@ void Controller::movePersonSafely(Person* p, Container* from, Container* to) {
     }else{
         displayError(ERROR_ARG_MESSAGE);
     }
+}
+
+void Controller::reset(Container* c) {
+    for(Person* p : c->getPeople()) {
+        movePerson(p, c, &_leftBank);
+    }
+}
+
+void Controller::resetGame() {
+    reset(&_rightBank);
+    reset(&_boat);
+    // TODO reset boat to _leftBank
 }

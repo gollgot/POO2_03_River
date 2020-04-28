@@ -31,7 +31,7 @@ private:
     const char LOAD_CHAR = 'e';
     const char UNLOAD_CHAR = 'd';
     const char MOVE_CHAR = 'm';
-    const char RESET_CHAR = 'r'; // TODO implement
+    const char RESET_CHAR = 'r';
     const char QUIT_CHAR = 'q';
     const char MENU_CHAR = 'h'; // TODO nasty space at the beginning of display
     const char RIVER_CHAR = '=';
@@ -79,6 +79,17 @@ private:
      * @param to
      */
     void movePersonSafely(Person* p, Container* from, Container* to);
+
+    /**
+     * Put all people of the Container in the initial Container (_leftBank).
+     * @param c
+     */
+    void reset(Container* c);
+
+    /**
+     * Resets the game properly.
+     */
+    void resetGame();
 };
 
 

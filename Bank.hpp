@@ -1,6 +1,8 @@
-//
-// Created by loic on 4/9/20.
-//
+/**
+ * File: Bank.hpp
+ * Authors: Robin Demarta & Loïc Dessaules
+ * Date: 09.04.2020
+ */
 
 #ifndef POO2_03_RIVER_BANK_HPP
 #define POO2_03_RIVER_BANK_HPP

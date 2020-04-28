@@ -1,6 +1,8 @@
-//
-// Created by loic on 4/9/20.
-//
+/**
+ * File: Bank.cpp
+ * Authors: Robin Demarta & Loïc Dessaules
+ * Date: 09.04.2020
+ */
 
 #include "Bank.hpp"
 
