@@ -189,7 +189,9 @@ void Controller::askAndRunCommand() {
                 displayError(ERROR_NOT_DRIVER);
             }
             nextTurn();
-        } else{
+        }
+        // Invalid command
+        else{
             displayError(ERROR_CMD_INVALID);
         }
     }
@@ -200,41 +202,33 @@ void Controller::askAndRunCommand() {
         string arg = userInput.substr(userInput.find(' ') + 1);
 
         // Command must be 1 char
-        if(command.length() == 1){ // TODO clean/refactor code bellow
+        if(command.length() == 1){
             char c = command[0];
             // Load person
             if(c == LOAD_CHAR){
-
                 if(_boat.getPeople().size() < _boat.getCapacity()){
                     Person* personFromBank = _boat.getBank()->getPersonByName(arg);
-                    if(personFromBank != nullptr) {
-                        // Verify move validity
-                        movePersonSafely(personFromBank, _boat.getBank(), &_boat);
-                    }else {
-                        displayError(ERROR_ARG_MESSAGE);
-                    }
+                    // Verify move validity
+                    movePersonSafely(personFromBank, _boat.getBank(), &_boat);
                 }else{
                     displayError(ERROR_BOAT_FULL);
                 }
-
                 nextTurn();
-
             }
             // Unload person
             else if(c == UNLOAD_CHAR) {
                 Person* personFromBoat = _boat.getPersonByName(arg);
-
-                if(personFromBoat != nullptr) {
-                    // Verify move validity
-                    movePersonSafely(personFromBoat, &_boat, _boat.getBank());
-                }else{
-                    displayError(ERROR_ARG_MESSAGE);
-                }
+                // Verify move validity
+                movePersonSafely(personFromBoat, &_boat, _boat.getBank());
                 nextTurn();
-            } else {
+            }
+            // Invalid command
+            else {
                 displayError(ERROR_CMD_INVALID);
             }
-        } else {
+        }
+        // Invalid command
+        else {
             displayError(ERROR_CMD_INVALID);
         }
     }
@@ -261,14 +255,18 @@ void Controller::movePerson(Person* p, Container* from, Container* to) const {
 }
 
 void Controller::movePersonSafely(Person* p, Container* from, Container* to) {
-    // Try move
-    movePerson(p, from, to);
+    if(p != nullptr){
+        // Try move
+        movePerson(p, from, to);
 
-    // Verify
-    Constraint* c = validateAllContainers();
-    if(c != nullptr) {
-        // Rollback and display error
-        movePerson(p, to, from);
-        displayError(c->getErrorMessage());
+        // Verify
+        Constraint* c = validateAllContainers();
+        if(c != nullptr) {
+            // Rollback and display error
+            movePerson(p, to, from);
+            displayError(c->getErrorMessage());
+        }
+    }else{
+        displayError(ERROR_ARG_MESSAGE);
     }
 }
