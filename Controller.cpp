@@ -257,7 +257,7 @@ Constraint* Controller::validateAllContainers() {
     return nullptr;
 }
 
-void Controller::movePerson(Person* p, Container* from, Container* to) const {
+void Controller::movePerson(Person* p, Container* from, Container* to) {
     from->removePerson(p);
     to->addPerson(p);
 }

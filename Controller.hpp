@@ -123,7 +123,7 @@ private:
      * @param from The starting Container
      * @param to The destination Container
      */
-    void movePerson(Person* p, Container* from, Container* to) const;
+    void movePerson(Person* p, Container* from, Container* to);
 
     /**
      * Moves a Person p from a container to another and displays an error if a constraint is not respected
