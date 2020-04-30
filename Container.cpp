@@ -46,6 +46,12 @@ size_t Container::getPeopleCount() const {
 }
 
 Person* Container::getPersonByName(const std::string& name) {
-    auto person = find(begin(), end(), name);
-    return person != end() ? *person : nullptr;
+
+    for(Person* p : _people){
+        if(p->equals(name)){
+            return p;
+        }
+    }
+
+    return nullptr;
 }

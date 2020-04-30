@@ -20,6 +20,7 @@ string Person::getName() const {
     return _name;
 }
 
-bool operator==(Person* p, const std::string& s) {
-    return p->_name == s;
+bool Person::equals(const std::string &s) const {
+    return _name == s;
 }
+

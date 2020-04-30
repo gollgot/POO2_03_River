@@ -40,12 +40,10 @@ public:
 
     /**
      * Compares a Person pointer's name with a name.
-     * Allows to use algorithm's find() on Person' name with string value
-     * @param p The first Person
      * @param s The name of the second Person
      * @return True if the Person has same name has the name in parameter
      */
-    friend bool operator==(Person* p, const std::string& s);
+    bool equals(const std::string& s) const;
 };
 
 
